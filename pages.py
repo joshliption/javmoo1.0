@@ -1,6 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
 import time
+import pymongo
+client = pymongo.MongoClient('localhost',27017)
+javmoo = client['javmoo']
+sheet_line = javmoo['sheet_line']
 
 def pages_details(url,data=None):
     header = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36'}
@@ -63,4 +67,7 @@ def pages_details(url,data=None):
                     'av播放截图':Simple
                 }
         print(data)
+        sheet_line.insert_one(data)
+        print('输入数据完成')
+
 
